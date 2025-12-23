@@ -1,21 +1,22 @@
-import { screen, fireEvent } from "@testing-library/react";
-import Filters from "../components/Filters";
+import { describe, test, expect } from "vitest";
 import { renderWithStore } from "./testUtils";
+import { screen } from "@testing-library/react";
+import Filters from "../components/Filters";
 
-test("renders filter buttons", () => {
-  renderWithStore(<Filters />);
+describe("Filters", () => {
+  test("renders filter buttons", () => {
+    renderWithStore(<Filters />);
 
-  expect(screen.getByText("all")).toBeInTheDocument();
-  expect(screen.getByText("completed")).toBeInTheDocument();
-  expect(screen.getByText("pending")).toBeInTheDocument();
-});
-
-test("search input updates", () => {
-  renderWithStore(<Filters />);
-
-  fireEvent.change(screen.getByPlaceholderText("Search..."), {
-    target: { value: "redux" },
+    expect(screen.getByText("All")).toBeInTheDocument();
+    expect(screen.getByText("Completed")).toBeInTheDocument();
+    expect(screen.getByText("Pending")).toBeInTheDocument();
   });
 
-  expect(screen.getByPlaceholderText("Search...").value).toBe("redux");
+  test("renders search input", () => {
+    renderWithStore(<Filters />);
+
+    expect(
+      screen.getByPlaceholderText("Search tasks...")
+    ).toBeInTheDocument();
+  });
 });

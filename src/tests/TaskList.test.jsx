@@ -1,10 +1,13 @@
+import { describe, test, expect } from "vitest";
 import { screen } from "@testing-library/react";
-import TaskList from "../components/TaskList";
 import { renderWithStore } from "./testUtils";
+import TaskList from "../components/TaskList";
 
-test("renders list of tasks from store", async () => {
-  renderWithStore(<TaskList />);
+describe("TaskList", () => {
+  test("renders list of tasks from store", () => {
+    renderWithStore(<TaskList />);
 
-  expect(await screen.findByText(/Learn Redux Toolkit/i))
-    .toBeInTheDocument();
+    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText("Build Task App")).toBeInTheDocument();
+  });
 });

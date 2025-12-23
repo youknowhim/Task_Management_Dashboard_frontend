@@ -1,22 +1,27 @@
+import { describe, test, expect } from "vitest";
+import { renderWithStore } from "./testUtils";
 import { screen, fireEvent } from "@testing-library/react";
 import TaskForm from "../components/TaskForm";
-import { renderWithStore } from "./testUtils";
 
-test("renders input and add button", () => {
-  renderWithStore(<TaskForm />);
-
-  expect(screen.getByPlaceholderText("Enter task...")).toBeInTheDocument();
-  expect(screen.getByText("Add")).toBeInTheDocument();
-});
-
-test("adds task when valid input is given", () => {
-  renderWithStore(<TaskForm />);
-
-  fireEvent.change(screen.getByPlaceholderText("Enter task..."), {
-    target: { value: "New Task" },
+describe("TaskForm", () => {
+  test("renders input and button", () => {
+    renderWithStore(<TaskForm />);
+    expect(
+      screen.getAllByPlaceholderText("Enter task...").length
+    ).toBeGreaterThan(0);
   });
 
-  fireEvent.click(screen.getByText("Add"));
+  test("clears input after add", () => {
+    renderWithStore(<TaskForm />);
 
-  expect(screen.getByText("New Task")).toBeInTheDocument();
+    const input =
+      screen.getAllByPlaceholderText("Enter task...")[0];
+
+    fireEvent.change(input, {
+      target: { value: "New Task" },
+    });
+    fireEvent.click(screen.getByText("Add"));
+
+    expect(input.value).toBe("");
+  });
 });

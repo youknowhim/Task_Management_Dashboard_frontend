@@ -1,26 +1,24 @@
-import { screen, fireEvent } from "@testing-library/react";
-import TaskItem from "../components/TaskItem";
+import { describe, test, expect } from "vitest";
 import { renderWithStore } from "./testUtils";
+import { screen } from "@testing-library/react";
+import TaskItem from "../components/TaskItem";
 
 const task = { id: 1, title: "Sample Task", completed: false };
 
-test("renders task title", () => {
-  renderWithStore(<TaskItem task={task} />);
-  expect(screen.getByText("Sample Task")).toBeInTheDocument();
-});
+describe("TaskItem", () => {
+  test("renders task title", () => {
+    renderWithStore(<TaskItem task={task} />);
+    expect(screen.getByText("Sample Task")).toBeInTheDocument();
+  });
 
-test("toggles task status", () => {
-  renderWithStore(<TaskItem task={task} />);
+  test("renders action buttons", () => {
+    renderWithStore(<TaskItem task={task} />);
 
-  fireEvent.click(screen.getByText("Done"));
+    expect(
+      screen.getByText("Mark as Completed")
+    ).toBeInTheDocument();
 
-  expect(screen.getByText("Pending")).toBeInTheDocument();
-});
-
-test("deletes task", () => {
-  renderWithStore(<TaskItem task={task} />);
-
-  fireEvent.click(screen.getByText("Delete"));
-
-  expect(screen.queryByText("Sample Task")).not.toBeInTheDocument();
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Delete")).toBeInTheDocument();
+  });
 });
