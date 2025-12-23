@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+import Filters from "./components/Filters";
+import ThemeToggle from "./components/ThemeToggle";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [dark, setDark] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div
+      className={
+        dark
+          ? "min-h-screen bg-gray-900 text-white"
+          : "min-h-screen bg-gray-100 text-black"
+      }
+    >
+      {/* Header */}
+      <header className="flex justify-between items-center p-4 shadow">
+        <h1 className="text-xl font-bold">
+          Task Management Dashboard
+        </h1>
+        <ThemeToggle dark={dark} setDark={setDark} />
+      </header>
 
-export default App
+      {/* Main Page Content */}
+      <main className="max-w-xl mx-auto p-4 space-y-4">
+        <TaskForm />
+        <Filters />
+        <TaskList />
+      </main>
+    </div>
+  );
+}
