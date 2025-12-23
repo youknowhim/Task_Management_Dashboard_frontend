@@ -21,7 +21,7 @@ export default function TaskForm() {
   return (
     <div className="flex gap-2">
       <input
-        className="border p-2 flex-1 rounded"
+        className="border-2 p-2 flex-1 rounded"
         placeholder="Enter task..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}

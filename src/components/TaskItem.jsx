@@ -8,7 +8,7 @@ export default function TaskItem({ task }) {
   const [title, setTitle] = useState(task.title);
 
   return (
-    <div className="flex justify-between items-center p-3 border rounded">
+    <div className="flex border-1 border-black justify-between items-center p-3 border rounded">
       {editing ? (
         <input
           className="border p-1 rounded"
@@ -22,14 +22,16 @@ export default function TaskItem({ task }) {
       )}
 
       <div className="flex gap-2">
-        <button
-          onClick={() =>
-            dispatch(updateTask({ ...task, completed: !task.completed }))
-          }
-          className="text-green-600"
-        >
-          {task.completed ? "Pending" : "Done"}
-        </button>
+  <button
+    onClick={() =>
+      dispatch(updateTask({ ...task, completed: !task.completed }))
+    }
+    className={
+      task.completed ? "text-yellow-600" : "text-green-600"
+    }
+  >
+    {task.completed ? "Mark as Pending" : "Mark as Completed"}
+  </button>
 
         {editing ? (
           <button
