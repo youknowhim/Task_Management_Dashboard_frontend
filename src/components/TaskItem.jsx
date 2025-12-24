@@ -8,7 +8,7 @@ export default function TaskItem({ task }) {
   const [title, setTitle] = useState(task.title);
 
   return (
-    <div className="flex border-1 border-black justify-between items-center p-3 border rounded">
+    <div className="flex border-1 border-blue-500 justify-between items-center p-3 border rounded">
       {editing ? (
         <input
           className="border p-1 rounded"
