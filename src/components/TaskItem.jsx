@@ -11,7 +11,7 @@ export default function TaskItem({ task }) {
     <div className="flex border-1 border-blue-500 justify-between items-center p-3 border rounded">
       {editing ? (
         <input
-          className="border p-1 rounded"
+          className="border text-black p-1 rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />

@@ -36,6 +36,7 @@ export default function Filters() {
           border px-3 py-1.5 rounded-full
           text-sm
           focus:outline-none focus:ring-2 focus:ring-black
+          text-black
         "
       />
     </div>
